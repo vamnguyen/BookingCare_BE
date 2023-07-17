@@ -36,17 +36,56 @@ let hashUserPassword = (password) => {
 
 const getAllUser = async (req, res) => {
   try {
-    const users = await db.User.findAll({
+    const allUsers = await db.User.findAll({
       raw: true,
     });
-    return users;
+    return allUsers;
   } catch (error) {
     console.error(error);
     res.status(404).send("Get All User failed!");
+  }
+};
+const getUserInfoById = async (id) => {
+  try {
+    const user = await db.User.findOne({
+      where: {
+        id,
+      },
+      raw: true,
+    });
+    return user;
+  } catch (error) {
+    console.log("Not found user in database" + error);
+  }
+};
+
+const updateUserData = async (userData) => {
+  try {
+    let userUpdate = await db.User.findOne({ where: { id: userData.id } });
+    if (userUpdate) {
+      userUpdate.firstName = userData.firstName;
+      userUpdate.lastName = userData.lastName;
+      userUpdate.address = userData.address;
+
+      await userUpdate.save();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteUserById = async (userId) => {
+  try {
+    await db.User.destroy({ where: { id: userId } });
+  } catch (error) {
+    console.log(error);
   }
 };
 
 module.exports = {
   createNewUser,
   getAllUser,
+  getUserInfoById,
+  updateUserData,
+  deleteUserById,
 };
