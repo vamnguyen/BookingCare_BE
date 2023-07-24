@@ -199,10 +199,32 @@ const updateUserInfo = async (data) => {
   }
 };
 
+const getAllCodeService = async (type) => {
+  try {
+    if (!type) {
+      return {
+        errCode: 1,
+        errMessage: "Missing required parameters!",
+      };
+    }
+
+    const allCode = await db.Allcode.findAll({
+      where: { type },
+    });
+    return {
+      errCode: 0,
+      data: allCode,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   handleUserLogin,
   getAllUsers,
   createNewUser,
   deleteUserById,
   updateUserInfo,
+  getAllCodeService,
 };
