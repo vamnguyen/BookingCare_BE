@@ -107,8 +107,10 @@ const createNewUser = (dataUser) => {
           lastName: dataUser.lastName,
           address: dataUser.address,
           phoneNumber: dataUser.phoneNumber,
-          gender: dataUser.gender === "1" ? true : false,
-          roleId: dataUser.roleId,
+          gender: dataUser.gender,
+          roleId: dataUser.role,
+          positionId: dataUser.position,
+          image: dataUser.avatar,
         });
 
         resolve({ errCode: 0, message: "Created successfully new User!" });
