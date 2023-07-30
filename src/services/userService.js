@@ -177,10 +177,10 @@ const updateUserInfo = async (data) => {
       user.firstName = data.firstName;
       user.lastName = data.lastName;
       user.address = data.address;
-      // user.roleId = data.role;
-      // user.positionId = data.position;
-      // user.gender = data.gender;
-      // user.phoneNumber = data.phoneNumber;
+      user.roleId = data.role;
+      user.positionId = data.position;
+      user.gender = data.gender;
+      user.phoneNumber = data.phoneNumber;
       if (data.avatar) {
         user.image = data.avatar;
       }
