@@ -162,7 +162,7 @@ const deleteUserById = async (userId) => {
 
 const updateUserInfo = async (data) => {
   try {
-    if (!data.id) {
+    if (!data.id || !data.gender || !data.position || !data.role) {
       return {
         errCode: 1,
         errMessage: "Missing required parameter!",
@@ -181,9 +181,7 @@ const updateUserInfo = async (data) => {
       user.positionId = data.position;
       user.gender = data.gender;
       user.phoneNumber = data.phoneNumber;
-      if (data.avatar) {
-        user.image = data.avatar;
-      }
+      user.image = data.avatar;
 
       await user.save();
       return {
