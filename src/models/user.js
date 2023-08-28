@@ -9,6 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.belongsTo(models.Allcode, {
+        foreignKey: "positionId",
+        targetKey: "key",
+        as: "positionData",
+      });
+      User.belongsTo(models.Allcode, {
+        foreignKey: "gender",
+        targetKey: "key",
+        as: "genderData",
+      });
     }
   }
   User.init(
